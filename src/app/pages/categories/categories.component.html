@@ -1,6 +1,8 @@
 <section class="page narrow-page">
-  <div class="page-heading"><div><h1>Categories</h1><p>Manage your major and minor expense categories.</p></div><button class="primary-button" (click)="showMajor = true">+ New Major Category</button></div>
-  <div class="category-manager-grid">
+  <!-- <div class="page-heading"><div><h1>Categories</h1>
+    <p>Manage your major and minor expense categories.</p>
+  </div><button class="primary-button" (click)="showMajor = true">+ New Major Category</button></div>
+  <div class="category-manager-grid"> -->
     @for (group of grouped(); track group.category.id) {
       <article class="panel manager-card"><div class="manager-header"><div><span class="manager-icon">{{ group.category.icon }}</span><strong>{{ group.category.name }}</strong></div><button class="link-button" (click)="openMinor(group.category.id)">+ Minor</button></div>
         <div class="minor-list">@for (minor of group.minors; track minor.id) {<span>{{ minor.name }}</span>} @empty {<span class="muted">No minor categories yet.</span>}</div>

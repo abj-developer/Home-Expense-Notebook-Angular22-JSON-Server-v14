@@ -35,7 +35,7 @@ export class CategoryDetailComponent {
     }).filter(group => group.expenses.length > 0);
   });
 
-  minorName(minorId: number): string {
-    return this.minors().find(m => m.id === minorId)?.name ?? 'Unknown';
-  }
+minorName(minorId: string): string {
+  return this.minors().find(m => m.id === minorId)?.name ?? 'Unknown';
+}
 }

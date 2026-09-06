@@ -7,7 +7,7 @@ export interface MajorCategory {
 }
 
 export interface MinorCategory {
-  id: number;
+  id: string;
   majorCategoryId: number;
   name: string;
 }
@@ -15,7 +15,7 @@ export interface MinorCategory {
 export interface Expense {
   id: number;
   majorCategoryId: number;
-  minorCategoryId: number;
+  minorCategoryId: string;
   amount: number;
   date: string;
   description: string;
@@ -23,7 +23,7 @@ export interface Expense {
 
 export interface ExpenseRequest {
   majorCategoryId: number;
-  minorCategoryId: number;
+  minorCategoryId: string;
   amount: number;
   date: string;
   description: string;

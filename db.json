@@ -1,0 +1,29 @@
+{
+  "$schema": "./node_modules/json-server/schema.json",
+  "majorCategories": [
+    { "id": 1, "name": "Rent & Others", "icon": "⌂", "accent": "rose" },
+    { "id": 2, "name": "Grocery", "icon": "🛒", "accent": "green" },
+    { "id": 3, "name": "Outside Food", "icon": "🍴", "accent": "orange" },
+    { "id": 4, "name": "Vedu Expenses", "icon": "🎓", "accent": "purple" },
+    { "id": 5, "name": "Miscellaneous", "icon": "•••", "accent": "blue" }
+  ],
+  "minorCategories": [
+    { "id": 101, "majorCategoryId": 1, "name": "Rent" },
+    { "id": 102, "majorCategoryId": 1, "name": "Electricity" },
+    { "id": 103, "majorCategoryId": 1, "name": "Internet" },
+    { "id": 201, "majorCategoryId": 2, "name": "Swiggy Instamart" },
+    { "id": 202, "majorCategoryId": 2, "name": "Zepto" },
+    { "id": 203, "majorCategoryId": 2, "name": "Offline" },
+    { "id": 204, "majorCategoryId": 2, "name": "Milk & Dairy" },
+    { "id": 301, "majorCategoryId": 3, "name": "Zomato" },
+    { "id": 302, "majorCategoryId": 3, "name": "Swiggy" },
+    { "id": 303, "majorCategoryId": 3, "name": "Restaurant" },
+    { "id": 401, "majorCategoryId": 4, "name": "School Fees" },
+    { "id": 402, "majorCategoryId": 4, "name": "Toys" },
+    { "id": 403, "majorCategoryId": 4, "name": "Clothes" },
+    { "id": 501, "majorCategoryId": 5, "name": "Travel" },
+    { "id": 502, "majorCategoryId": 5, "name": "Shopping" },
+    { "id": 503, "majorCategoryId": 5, "name": "Other" }
+  ],
+  "expenses": []
+}

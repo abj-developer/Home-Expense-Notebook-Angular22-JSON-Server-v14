@@ -1,0 +1,12 @@
+<section class="page narrow-page">
+  <div class="page-heading"><div><h1>Categories</h1><p>Manage your major and minor expense categories.</p></div><button class="primary-button" (click)="showMajor = true">+ New Major Category</button></div>
+  <div class="category-manager-grid">
+    @for (group of grouped(); track group.category.id) {
+      <article class="panel manager-card"><div class="manager-header"><div><span class="manager-icon">{{ group.category.icon }}</span><strong>{{ group.category.name }}</strong></div><button class="link-button" (click)="openMinor(group.category.id)">+ Minor</button></div>
+        <div class="minor-list">@for (minor of group.minors; track minor.id) {<span>{{ minor.name }}</span>} @empty {<span class="muted">No minor categories yet.</span>}</div>
+      </article>
+    }
+  </div>
+</section>
+@if (showMajor) {<div class="modal-backdrop" (click)="showMajor=false"><div class="modal" (click)="$event.stopPropagation()"><h2>Create Major Category</h2><input [(ngModel)]="majorName" placeholder="e.g. Utilities" (keyup.enter)="createMajor()"><div class="modal-actions"><button class="secondary-button" (click)="showMajor=false">Cancel</button><button class="primary-button" (click)="createMajor()">Create</button></div></div></div>}
+@if (showMinor) {<div class="modal-backdrop" (click)="showMinor=false"><div class="modal" (click)="$event.stopPropagation()"><h2>Add Minor Category</h2><p>Under <strong>{{ majorNameById() }}</strong></p><input [(ngModel)]="minorName" placeholder="e.g. BigBasket" (keyup.enter)="createMinor()"><div class="modal-actions"><button class="secondary-button" (click)="showMinor=false">Cancel</button><button class="primary-button" (click)="createMinor()">Add</button></div></div></div>}

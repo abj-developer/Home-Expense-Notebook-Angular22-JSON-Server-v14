@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: home-expense-mock-api
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm run mock-api:prod

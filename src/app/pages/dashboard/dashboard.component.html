@@ -1,0 +1,38 @@
+<section class="page">
+  <div class="welcome-card"><div><h1>Welcome back! <span>👋</span></h1><p>Manage your home expenses and stay in control.</p></div><div class="quote">“A small step today<br>leads to a better tomorrow.”</div></div>
+
+  <div class="category-grid">
+    @for (item of categoryTotals(); track item.category.id) {
+      <a class="category-card category-card-link" [class]="'accent-' + item.category.accent" [routerLink]="['/category', item.category.id]">
+        <div class="category-icon">{{ item.category.icon }}</div><div class="category-name">{{ item.category.name }}</div>
+        <div class="category-amount">₹ {{ item.amount | number:'1.0-0' }}</div><div class="category-meta">{{ item.count }} expense{{ item.count === 1 ? '' : 's' }} <span>›</span></div>
+      </a>
+    }
+    <button class="category-card create-card" type="button" (click)="showMajorModal = true"><div class="plus-circle">+</div><strong>Create</strong><span>New Category</span></button>
+  </div>
+
+  <div class="dashboard-grid">
+    <section class="panel add-panel">
+      <div class="panel-title"><span class="title-icon">+</span><h2>Add New Expense</h2></div>
+      <form [formGroup]="expenseForm" (ngSubmit)="addExpense()">
+        <div class="form-row three">
+          <label><span>Major Category <b>*</b></span><select formControlName="majorCategoryId">@for (category of categories(); track category.id) {<option [value]="category.id">{{ category.icon }} &nbsp; {{ category.name }}</option>}</select></label>
+          <label><span>Minor Category <b>*</b></span><select formControlName="minorCategoryId">@for (minor of selectedMinors(); track minor.id) {<option [value]="minor.id">{{ minor.name }}</option>}</select><button class="link-button" type="button" (click)="showMinorModal = true">+ Add New Minor Category</button></label>
+          <label><span>Amount <b>*</b></span><div class="amount-input"><span>₹</span><input type="number" formControlName="amount" min="1" placeholder="0.00"></div></label>
+        </div>
+        <div class="form-row"><label class="date-field"><span>Date <b>*</b></span><input type="date" formControlName="date" [min]="minDate()" [max]="maxDate()"></label></div>
+        <label><span>Description <em>(Optional)</em></span><input type="text" formControlName="description" placeholder="Enter expense details..."></label>
+        <div class="form-actions">@if (message) {<span class="success-message">✓ {{ message }}</span>}<button class="primary-button" type="submit" [disabled]="saving">{{ saving ? 'Saving...' : '+  Add Expense' }}</button></div>
+      </form>
+    </section>
+
+    <section class="panel total-panel"><div class="panel-title"><span class="chart-icon">▥</span><h2>Total Expenses</h2></div><div class="grand-total">₹ {{ total() | number:'1.0-0' }}</div><div class="month-label">for {{ monthLabel() }}</div><div class="total-list">
+      @for (item of categoryTotals(); track item.category.id) {<div class="total-line"><div><i [class]="'dot ' + item.category.accent"></i>{{ item.category.name }}</div><strong>₹ {{ item.amount | number:'1.0-0' }}</strong><span>{{ item.percentage | number:'1.1-1' }}%</span></div>}
+    </div></section>
+  </div>
+
+  <div class="phase2-banner"><div class="phase2-icon">◷</div><div><strong>More Insights Coming in Phase 2</strong><p>Recent expenses list and expense distribution charts will be available in Phase 2.</p><em>For now, focus on adding your expenses and tracking your totals.</em></div></div>
+</section>
+
+@if (showMajorModal) {<div class="modal-backdrop" (click)="showMajorModal = false"><div class="modal" (click)="$event.stopPropagation()"><h2>Create Major Category</h2><p>Add a new top-level expense category.</p><input [(ngModel)]="newMajorName" placeholder="e.g. Utilities" (keyup.enter)="addMajorCategory()"><div class="modal-actions"><button type="button" class="secondary-button" (click)="showMajorModal = false">Cancel</button><button type="button" class="primary-button" (click)="addMajorCategory()">Create</button></div></div></div>}
+@if (showMinorModal) {<div class="modal-backdrop" (click)="showMinorModal = false"><div class="modal" (click)="$event.stopPropagation()"><h2>Add Minor Category</h2><p>New minor category under <strong>{{ selectedMajorName() }}</strong>.</p><input [(ngModel)]="newMinorName" placeholder="e.g. BigBasket" (keyup.enter)="addMinorCategory()"><div class="modal-actions"><button type="button" class="secondary-button" (click)="showMinorModal = false">Cancel</button><button type="button" class="primary-button" (click)="addMinorCategory()">Add</button></div></div></div>}

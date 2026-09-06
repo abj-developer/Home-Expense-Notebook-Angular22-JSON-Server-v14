@@ -1,0 +1,49 @@
+<section class="page narrow-page category-detail-page">
+  <a class="back-link" routerLink="/">← Back to Dashboard</a>
+
+  @if (category(); as currentCategory) {
+    <div class="detail-hero" [class]="'accent-' + currentCategory.accent">
+      <div class="detail-hero-left">
+        <div class="detail-icon">{{ currentCategory.icon }}</div>
+        <div><h1>{{ currentCategory.name }}</h1><p>{{ categoryExpenses().length }} expense{{ categoryExpenses().length === 1 ? '' : 's' }} recorded in this category for {{ monthLabel() }}</p></div>
+      </div>
+      <div class="detail-total"><span>Category Total</span><strong>₹ {{ total() | number:'1.0-0' }}</strong></div>
+    </div>
+
+    <div class="detail-summary">
+      <div><span>Total Expenses</span><strong>{{ categoryExpenses().length }}</strong></div>
+      <div><span>Subcategories</span><strong>{{ minorGroups().length }}</strong></div>
+      <div><span>Average Expense</span><strong>₹ {{ (categoryExpenses().length ? total() / categoryExpenses().length : 0) | number:'1.0-0' }}</strong></div>
+    </div>
+
+    <h2 class="section-heading">Expenses by Subcategory</h2>
+
+    @for (group of minorGroups(); track group.minor.id) {
+      <section class="minor-expense-card">
+        <div class="minor-heading">
+          <div><span class="minor-bullet">•</span><strong>{{ group.minor.name }}</strong><small>{{ group.expenses.length }} expense{{ group.expenses.length === 1 ? '' : 's' }}</small></div>
+          <strong class="minor-total">₹ {{ group.total | number:'1.0-0' }}</strong>
+        </div>
+
+        @if (group.expenses.length) {
+          <div class="expense-table">
+            @for (expense of group.expenses; track expense.id) {
+              <div class="expense-row">
+                <div><strong>₹ {{ expense.amount | number:'1.0-0' }}</strong><span>{{ expense.date | date:'dd MMM yyyy' }}</span></div>
+                <p>{{ expense.description || 'No description' }}</p>
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="empty-minor">No expenses added yet.</div>
+        }
+      </section>
+    }
+
+    @if (!minorGroups().length) {
+      <div class="empty-state">No subcategories configured for this category.</div>
+    }
+  } @else {
+    <div class="empty-state"><h2>Category not found</h2><a class="primary-button" routerLink="/">Back to Dashboard</a></div>
+  }
+</section>

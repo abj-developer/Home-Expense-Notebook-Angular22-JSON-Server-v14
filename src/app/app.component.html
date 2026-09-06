@@ -1,0 +1,47 @@
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">⌂</div>
+      <div>
+        <strong>Home Expense</strong>
+        <strong>Notebook</strong>
+      </div>
+    </div>
+
+    <nav class="nav-list" aria-label="Main navigation">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><span>⌂</span> Dashboard</a>
+      <a routerLink="/expenses" routerLinkActive="active"><span>▣</span> Expenses</a>
+      <a routerLink="/categories" routerLinkActive="active"><span>□</span> Categories</a>
+      <a routerLink="/reports" routerLinkActive="active"><span>⌁</span> Reports</a>
+      <a routerLink="/settings" routerLinkActive="active"><span>⚙</span> Settings</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div>♡</div>
+      <div>
+        <strong>Track Today</strong>
+        <span>A Better Tomorrow</span>
+      </div>
+      <small>v1.0.0 • Angular 22</small>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div class="mobile-brand">⌂ <strong>Home Expense Notebook</strong></div>
+      <div class="topbar-spacer"></div>
+      <label class="month-picker" aria-label="Select expense month">
+        <span>▣</span>
+        <select [ngModel]="selectedMonth()" (ngModelChange)="onMonthChange($event)" aria-label="Expense month">
+          @for (month of monthOptions; track month.key) {
+            <option [value]="month.key">{{ month.label }}</option>
+          }
+        </select>
+        <span>⌄</span>
+      </label>
+      <div class="profile"><div class="avatar">A</div><span>Ambuj</span><span>⌄</span></div>
+    </header>
+
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -8,5 +8,6 @@
     }
   </div>
 </section>
-@if (showMajor) {<div class="modal-backdrop" (click)="showMajor=false"><div class="modal" (click)="$event.stopPropagation()"><h2>Create Major Category</h2><input [(ngModel)]="majorName" placeholder="e.g. Utilities" (keyup.enter)="createMajor()"><div class="modal-actions"><button class="secondary-button" (click)="showMajor=false">Cancel</button><button class="primary-button" (click)="createMajor()">Create</button></div></div></div>}
+<!-- @if (showMajor) {<div class="modal-backdrop" (click)="showMajor=false"><div class="modal" (click)="$event.stopPropagation()"><h2>Create Major Category</h2><input [(ngModel)]="majorName" placeholder="e.g. Utilities" (keyup.enter)="createMajor()"><div class="modal-actions"><button class="secondary-button" (click)="showMajor=false">Cancel</button><button class="primary-button" (click)="createMajor()">Create</button></div></div></div>} -->
+
 @if (showMinor) {<div class="modal-backdrop" (click)="showMinor=false"><div class="modal" (click)="$event.stopPropagation()"><h2>Add Minor Category</h2><p>Under <strong>{{ majorNameById() }}</strong></p><input [(ngModel)]="minorName" placeholder="e.g. BigBasket" (keyup.enter)="createMinor()"><div class="modal-actions"><button class="secondary-button" (click)="showMinor=false">Cancel</button><button class="primary-button" (click)="createMinor()">Add</button></div></div></div>}

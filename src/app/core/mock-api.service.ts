@@ -145,6 +145,21 @@ export class MockApiService {
       );
   }
 
+
+deleteExpense(id: string): Observable<void> {
+  return this.http
+    .delete<void>(`${this.baseUrl}/expenses/${id}`)
+    .pipe(
+      tap(() => {
+        this.expenses$.next(
+          this.expenses$.value.filter(
+            expense => expense.id !== id
+          )
+        );
+      })
+    );
+}
+
   private normalizeMajor = (
     item: MajorCategory
   ): MajorCategory => ({
@@ -164,7 +179,7 @@ export class MockApiService {
     item: Expense
   ): Expense => ({
     ...item,
-    id: Number(item.id),
+    id: String(item.id),
     majorCategoryId: Number(item.majorCategoryId),
     minorCategoryId: String(item.minorCategoryId),
     amount: Number(item.amount)

@@ -13,7 +13,7 @@ export interface MinorCategory {
 }
 
 export interface Expense {
-  id: number;
+  id: string;
   majorCategoryId: number;
   minorCategoryId: string;
   amount: number;

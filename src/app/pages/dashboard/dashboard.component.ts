@@ -69,6 +69,19 @@ export class DashboardComponent {
     });
   }
 
+  deleteExpense(expense: Expense): void {
+  if (!confirm('Are you sure you want to delete this expense?')) {
+    return;
+  }
+
+  this.api.deleteExpense(expense.id).subscribe(() => {
+    this.message = 'Expense deleted successfully.';
+    setTimeout(() => this.message = '', 2500);
+  });
+}
+
+
+
   addMajorCategory(): void {
     const name = this.newMajorName.trim(); if (!name) return;
     this.api.addMajorCategory(name).subscribe(category => { this.newMajorName = ''; this.showMajorModal = false; this.expenseForm.controls.majorCategoryId.setValue(category.id); });
